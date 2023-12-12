@@ -1,7 +1,7 @@
 from pauli_mat_vec import iden, sigma_x, sigma_y, sigma_z
 import numpy as np 
 
-
+__all__ = [geo]
 
 ## the geodesic function
 def geo(te=0.2,ri=np.array([0.0, 0.0, 0.0]),sf=np.array([0.0, 0.0, 0.0])):
