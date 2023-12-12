@@ -1,4 +1,6 @@
-import numpy as np
+from pauli_mat_vec import iden, sigma_x, sigma_y, sigma_z
+import numpy as np 
+
 
 
 ## the geodesic function
@@ -17,8 +19,8 @@ def geo(te=0.2,ri=np.array([0.0, 0.0, 0.0]),sf=np.array([0.0, 0.0, 0.0])):
     rho1 = 0.5 * (iden + ri[0] * sigma_x + ri[1] * sigma_y + ri[2] * sigma_z)
     sigma2 = 0.5 * (iden + sf[0] * sigma_x + sf[1] * sigma_y + sf[2] * sigma_z)
     
-    # calculate the square root and its inverse of each density matrix
-    rootrho1 = np.sqrt(1 / (np.trace(rho1) + 2 * np.sqrt(np.linalg.det(rho1)))) * (rho1 + np.sqrt(np.linalg.det(rho1)) * iden)
+    # calculate the square root and its inverse of the final matrix 
+    #rootrho1 = np.sqrt(1 / (np.trace(rho1) + 2 * np.sqrt(np.linalg.det(rho1)))) * (rho1 + np.sqrt(np.linalg.det(rho1)) * iden)
     #rootinverrho1 = np.linalg.inv(rootrho1)
     rootsigma2 = np.sqrt(1 / (np.trace(sigma2) + 2 * np.sqrt(np.linalg.det(sigma2)))) * (sigma2 + np.sqrt(np.linalg.det(sigma2)) * iden)
     rootinversigma2 = np.linalg.inv(rootsigma2)
