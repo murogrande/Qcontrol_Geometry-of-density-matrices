@@ -7,3 +7,14 @@ iden = np.array([[1.0, 0.0], [0.0, 1.0]])
 zero = np.array([[1.0], [0.0]])
 uno = np.array([[0.0], [1.0]])
 iden = np.array([[1.0,0.0],[0.0,1.0]])
+
+
+def bloch_vector(rho):
+    ''' 
+    This functions takes a density matrix rho and we get the coordinates on the Bloch sphere
+    '''
+    vec = np.array([np.trace(rho @ sigma_x),
+                    np.trace(rho @ sigma_y),
+                    np.trace(rho @ sigma_z)])
+    #return vec / np.linalg.norm(vec) #not normzalized becuase it does not work
+    return vec 

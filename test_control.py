@@ -1,6 +1,11 @@
 import unittest
-import geodesic as geo
 import numpy as np
+
+import geodesic as geo
+import muk as muk
+from fidelity import fidelity
+
+
 
 class TestAlgo(unittest.TestCase):
 
@@ -10,7 +15,6 @@ class TestAlgo(unittest.TestCase):
 
     def tearDown(self) -> None:
         return super().tearDown()
-
 
     def test_geodesic(self):
         
@@ -28,7 +32,6 @@ class TestAlgo(unittest.TestCase):
 
         self.assertAlmostEqual(np.trace(georesult).imag,0.0)
         self.assertAlmostEqual(np.trace(georesult).real,1.0)
-
 
         tau = -0.2
         georesult = geo.geodesic(tau,self.vect1,self.vect2)
@@ -48,6 +51,26 @@ class TestAlgo(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             geo.geodesic(tau,self.vect1,np.array([1.0,0.0,0.0]))
+
+    def test_muk(self):
+        mukresult = muk.muk(self.vect1,self.vect2)
+        self.assertAlmostEqual(mukresult[0],0.5833833511969478)
+        self.assertAlmostEqual(mukresult[1],0.0)
+        self.assertAlmostEqual(mukresult[2],-0.5833833511969478)
+
+    def test_fidelity(self):
+        fidelityres1 = fidelity(self.vect1,self.vect2)
+        fidelityres2 = fidelity(self.vect1,self.vect1)
+        fidelityres3 = fidelity(self.vect2,self.vect2)
+
+        self.assertAlmostEqual(fidelityres1,0.595)
+        self.assertAlmostEqual(fidelityres2,1.0)
+        self.assertAlmostEqual(fidelityres3,1.0)
+    
+
+
+
+
 
 
 if __name__ == '__main__':
