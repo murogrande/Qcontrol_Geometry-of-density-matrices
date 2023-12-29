@@ -16,7 +16,6 @@ class TestAlgo(unittest.TestCase):
         return super().tearDown()
 
     def test_geodesic(self):
-
         georesult = geo.geodesic(self.tau, self.vect1, self.vect2)
         self.assertEqual(georesult[0, 0].real, 0.9092521918410296)
         self.assertEqual(georesult[0, 0].imag, 0.0)
@@ -31,7 +30,6 @@ class TestAlgo(unittest.TestCase):
         self.assertAlmostEqual(np.trace(georesult).imag, 0.0)
         self.assertAlmostEqual(np.trace(georesult).real, 1.0)
 
-        
         georesult = geo.geodesic(-self.tau, self.vect1, self.vect2)
 
         self.assertEqual(georesult[0, 0].real, 0.9567036024784532)

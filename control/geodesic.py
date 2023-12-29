@@ -3,6 +3,7 @@ import numpy as np
 
 __all__ = [geo]
 
+
 ## the geodesic function
 def geo(te=0.2, ri=np.array([0.0, 0.0, 0.0]), sf=np.array([0.0, 0.0, 0.0])):
     """This is the function for the geodesic"""
