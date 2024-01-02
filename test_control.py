@@ -99,6 +99,19 @@ class TestAlgo(unittest.TestCase):
             0.026999999999999996,
         ]
 
+        solVeclanbdas = [
+            61.2742005627058,
+            66.1754754389770,
+            72.2489523163035,
+            79.9079104001009,
+            89.7922670200548,
+            102.939219395469,
+            121.118307692969,
+            147.492623432852,
+            187.666770093428,
+            248.164669292313,
+        ]
+
         estadoslist, tiempolists, solution, vec_lambda = control1setup3(
             qsri,
             qssf,
@@ -116,6 +129,9 @@ class TestAlgo(unittest.TestCase):
 
         for i in range(Nmax):
             self.assertAlmostEqual(solTiempo[i], tiempolists[i])
+
+        for i in range(Nmax):
+            self.assertAlmostEqual(solVeclanbdas[i], vec_lambda[i])
 
 
 if __name__ == "__main__":
