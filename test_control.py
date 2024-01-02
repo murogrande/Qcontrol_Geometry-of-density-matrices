@@ -5,6 +5,7 @@ import geodesic as geo
 import muk as muk
 from fidelity import fidelity
 from controlSetup3 import control1setup3
+from getTimeFidelity import get_time_fidelity
 
 
 class TestAlgo(unittest.TestCase):
@@ -132,6 +133,38 @@ class TestAlgo(unittest.TestCase):
 
         for i in range(Nmax):
             self.assertAlmostEqual(solVeclanbdas[i], vec_lambda[i])
+
+    def test_getTimeFidelity(self):
+        qsri = 1 / np.sqrt(3) * np.array([0.7, 0.8, 0.8])
+        qssf = 1 / np.sqrt(3) * np.array([0.2, 0.9, 0.0])
+        Nmax = 40
+        imax = 7
+        deltat = 0.0030
+
+        solFinalEstados = [
+            ([0.11515949, 0.63900878, 0.02595626]),
+            ([0.11562241, 0.63325575, 0.02445069]),
+            ([0.11602751, 0.62753868, 0.0229844]),
+            ([0.11637749, 0.62185806, 0.02155605]),
+            ([0.1166751, 0.61621426, 0.02016439]),
+            ([0.11692304, 0.61060763, 0.01880823]),
+            ([0.11712389, 0.60503845, 0.01748644]),
+            ([0.11728012, 0.59950694, 0.01619793]),
+            ([0.11739401, 0.59401331, 0.01494169]),
+            ([0.11746776, 0.58855771, 0.01371674]),
+        ]
+
+        estadoslist, tiempolists, solution, _ = control1setup3(
+            qsri, qssf, Nmax=Nmax, deltat=deltat
+        )
+        finalestados, finaltiempotot, list_lambda_time = get_time_fidelity(
+            estadoslist, tiempolists, solution, imax, qssf
+        )
+
+        for i in range(30, Nmax):
+            self.assertAlmostEqual(list(finalestados[i])[0], solFinalEstados[i - 30][0])
+            self.assertAlmostEqual(list(finalestados[i])[1], solFinalEstados[i - 30][1])
+            self.assertAlmostEqual(list(finalestados[i])[2], solFinalEstados[i - 30][2])
 
 
 if __name__ == "__main__":
