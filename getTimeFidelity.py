@@ -60,7 +60,7 @@ def get_time_fidelity(c, tiempototal, soln, imax, sf, w0=5, gamma_0=0.01, gamma_
         ri = rnew
         c.append(ri)
 
-        ######################################### we have to use the control1setup3 function here
+        ############################## we have to use the control1setup3 function here
         print("New quantum state", ri)
 
         # calculate vk, ukx, uky, and ukz

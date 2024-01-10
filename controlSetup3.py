@@ -33,6 +33,7 @@ def control1setup3(
     oldri = ri  ## save the initial state ri
     # for k in range(Nmax):
     while (fidelity(oldri, sf) <= fidelity(ri, sf)) and (helperk < Nmax):
+        # while (fidelity(oldri, sf) - fidelity(ri, sf)<0.0000001) and (helperk < Nmax):
         # calculate vk, ukx, uky, and ukz
         vk = (
             lambda_x / 4.0 * (2.0 * muk(ri, sf)[2] - np.dot(ri, D_matrix @ muk(ri, sf)))
