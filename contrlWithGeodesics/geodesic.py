@@ -1,12 +1,11 @@
-from pauli_mat_vec import iden, sigma_x, sigma_y, sigma_z
+from .pauli_mat_vec import iden, sigma_x, sigma_y, sigma_z
 import numpy as np
-
-# __all__ = [geo]
 
 
 ## the geodesic function
-def geo(te=0.2, ri=np.array([0.0, 0.0, 0.0]), sf=np.array([0.0, 0.0, 0.0])):
-    """This is the function for the geodesic"""
+def geodesic(te: float, ri: np.array, sf: np.array):
+    """Gives the geodesic between two vectors at a given tau, where tau is the
+    parameter of the geodesic"""
     ###
     # Geodesic given 2 vectors that belongs to the Bloch sphere
     ### INPUT
@@ -16,6 +15,10 @@ def geo(te=0.2, ri=np.array([0.0, 0.0, 0.0]), sf=np.array([0.0, 0.0, 0.0])):
     ### OUTPUT
     # a quantum state at te given by geodesic between ri and sf
     #####################################
+
+    if np.linalg.norm(sf) == 1.0:
+        raise ValueError("sf needs to be less than 1 and also ri.")
+
     # define the density matrices for the initial and final states
     rho1 = 0.5 * (iden + ri[0] * sigma_x + ri[1] * sigma_y + ri[2] * sigma_z)
     sigma2 = 0.5 * (iden + sf[0] * sigma_x + sf[1] * sigma_y + sf[2] * sigma_z)
@@ -42,7 +45,6 @@ def geo(te=0.2, ri=np.array([0.0, 0.0, 0.0]), sf=np.array([0.0, 0.0, 0.0])):
     theta0 = np.arccos(np.sqrt(fide))
 
     # define a function for the geodesic
-
     return (
         (np.cos(te * theta0) - np.sin(te * theta0) / np.tan(theta0)) ** 2 * rho1
         + (np.sin(te * theta0)) ** 2 / (np.sin(theta0)) ** 2 * sigma2

@@ -1,8 +1,8 @@
 import numpy as np
 from sympy import Symbol
-from fidelity import fidelity
+from .fidelity import fidelity
 from scipy.optimize import minimize
-from muk import muk
+from .muk import muk
 from sympy.solvers import solve
 from scipy.integrate import solve_ivp
 
