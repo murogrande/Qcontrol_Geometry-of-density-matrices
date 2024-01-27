@@ -1,4 +1,4 @@
-print("This is a start")
+print("Control activated and ready to use")
 __all__ = ["geodesic", "pauli_mat_vec", "fidelity", "muk", "controlSetup3"]
 
 from .geodesic import geodesic
