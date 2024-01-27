@@ -1,6 +1,15 @@
 import unittest
 import numpy as np
 
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
+sys.path.append(parent_dir)
+
+# sys.path.append("/home/mauro/Documents/personal/sphener-code/Qcontrol_Geometry-of-density-matrices")
+
 from contrlWithGeodesics import geodesic
 from contrlWithGeodesics import muk
 from contrlWithGeodesics import fidelity
