@@ -1,7 +1,9 @@
+import numpy as np
+
 from contrlWithGeodesics import geodesic as geo
 from contrlWithGeodesics import fidelity as fide
 from contrlWithGeodesics.controlSetup3 import control1setup3
-import numpy as np
+
 
 import sys
 
