@@ -1,11 +1,11 @@
 import unittest
 import numpy as np
 
-import geodesic as geo
-import muk as muk
-from fidelity import fidelity
-from controlSetup3 import control1setup3
-from getTimeFidelity import get_time_fidelity
+from contrlWithGeodesics import geodesic
+from contrlWithGeodesics import muk
+from contrlWithGeodesics import fidelity
+from contrlWithGeodesics import control1setup3
+from contrlWithGeodesics import get_time_fidelity
 
 
 class TestAlgo(unittest.TestCase):
@@ -18,7 +18,7 @@ class TestAlgo(unittest.TestCase):
         return super().tearDown()
 
     def test_geodesic(self):
-        georesult = geo.geodesic(self.tau, self.vect1, self.vect2)
+        georesult = geodesic(self.tau, self.vect1, self.vect2)
         self.assertEqual(georesult[0, 0].real, 0.9092521918410296)
         self.assertEqual(georesult[0, 0].imag, 0.0)
         self.assertEqual(georesult[0, 1].real, 0.12487213325637833)
@@ -32,7 +32,7 @@ class TestAlgo(unittest.TestCase):
         self.assertAlmostEqual(np.trace(georesult).imag, 0.0)
         self.assertAlmostEqual(np.trace(georesult).real, 1.0)
 
-        georesult = geo.geodesic(-self.tau, self.vect1, self.vect2)
+        georesult = geodesic(-self.tau, self.vect1, self.vect2)
 
         self.assertEqual(georesult[0, 0].real, 0.9567036024784532)
         self.assertEqual(georesult[0, 0].imag, 0.0)
@@ -48,10 +48,10 @@ class TestAlgo(unittest.TestCase):
         self.assertAlmostEqual(np.trace(georesult).real, 1.0)
 
         with self.assertRaises(ValueError):
-            geo.geodesic(self.tau, self.vect1, np.array([1.0, 0.0, 0.0]))
+            geodesic(self.tau, self.vect1, np.array([1.0, 0.0, 0.0]))
 
     def test_muk(self):
-        mukresult = muk.muk(self.vect1, self.vect2)
+        mukresult = muk(self.vect1, self.vect2)
         self.assertAlmostEqual(mukresult[0], 0.5833833511969478)
         self.assertAlmostEqual(mukresult[1], 0.0)
         self.assertAlmostEqual(mukresult[2], -0.5833833511969478)
