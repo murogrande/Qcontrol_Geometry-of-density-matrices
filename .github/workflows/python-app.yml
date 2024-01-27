@@ -23,10 +23,6 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-
-    - name: Set up environment
-      run: |
-        export PYTHONPATH="${PYTHONPATH}:/home/runner/work/Qcontrol_Geometry-of-density-matrices/Qcontrol_Geometry-of-density-matrices/contrlWithGeodesics"
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -38,6 +34,9 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Set up environment
+      run: |
+        export PYTHONPATH="${PYTHONPATH}:~/work/Qcontrol_Geometry-of-density-matrices/contrlWithGeodesics"
     - name: Test with pytest
       run: |
         cd tests
