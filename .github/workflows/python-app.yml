@@ -36,7 +36,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Set up environment
       run: |
-        export PYTHONPATH="${PYTHONPATH}:~/work/Qcontrol_Geometry-of-density-matrices/contrlWithGeodesics"
+        export PYTHONPATH="${PYTHONPATH}:~/work/Qcontrol_Geometry-of-density-matrices/Qcontrol_Geometry-of-density-matrices/contrlWithGeodesics"
     - name: Test with pytest
       run: |
         cd tests
