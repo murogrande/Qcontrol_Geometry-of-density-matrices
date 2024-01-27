@@ -1,0 +1,18 @@
+[project]
+name = "ControlWithGeodesic"
+description = "Optimal Control using geodesics of Density matrices manifild "
+readme = "README.md"
+authors = [
+    { name = "Mauro Mendizabal", email = "murogrande20@gmail.com" },
+    { name = "Dominique Spehner", email = "dspehner@ing-mat.udec.cl" },
+]
+url="https://github.com/murogrande/Qcontrol_Geometry-of-density-matrices"
+requires-python = ">=3.14"
+
+dependencies = [
+  "numpy",
+  "scipy",
+  "numpy",
+  "pytest",
+  "black",
+]
