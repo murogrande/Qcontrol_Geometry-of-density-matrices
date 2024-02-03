@@ -30,10 +30,16 @@ def control1setup3(
     # iterate to find the lambda value
     helperk = 0
     # auxtime =
-    oldri = ri  ## save the initial state ri
-    # for k in range(Nmax):
-    while (fidelity(oldri, sf) <= fidelity(ri, sf)) and (helperk < Nmax):
-        # while (fidelity(oldri, sf) - fidelity(ri, sf)<0.0000001) and (helperk < Nmax):
+    oldri = ri  # inicializar ri calculculando explicitamente con el paso siguiente
+
+    # while (fidelity(oldri, sf) <= fidelity(ri, sf)) and (helperk < Nmax):
+    print("before while")
+    while helperk <= 1 or (
+        (fidelity(ri, sf) - fidelity(oldri, sf) >= 0.00001) and (helperk < Nmax)
+    ):
+        """helperk==0: eliminarlo y ri = calcular explicitamente con el paso siguiente"""
+        print("k", helperk)
+        print(fidelity(ri, sf) - fidelity(oldri, sf))
         # calculate vk, ukx, uky, and ukz
         vk = (
             lambda_x / 4.0 * (2.0 * muk(ri, sf)[2] - np.dot(ri, D_matrix @ muk(ri, sf)))
