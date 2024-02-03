@@ -3,7 +3,8 @@ import numpy as np
 from contrlWithGeodesics import geodesic as geo
 from contrlWithGeodesics import fidelity as fide
 from contrlWithGeodesics.controlSetup3 import control1setup3
-
+from contrlWithGeodesics.control3_step import control3_step
+import sympy
 
 import sys
 
@@ -13,10 +14,21 @@ vect1 = np.array([0.0, 0.0, 0.9])
 vect2 = np.array([0.9, 0.0, 0.0])
 
 print(geo(0.1, vect1, vect2))
+
 print(fide(vect1, vect2))
-# Test values
-# qsri = 1/np.sqrt(3)*np.array([1.0, 1.0, 0.9])
-# qssf = np.array([0.0, 0.9, 0.0])
+
+### data to test control3_step
+w0 = 5
+gamma_0 = 0.01
+gamma_c = 10
+deltat = 0.003
+lambda_x = sympy.Symbol("lambda_x", real=True)
+D_matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 2]]  ## Dmatrix of setup 3
+vector_lambda = list([])
+x, y, z, soln = control3_step(
+    vect1, vect2, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
+)
+
 qsri = 1 / np.sqrt(3) * np.array([0.7, 0.8, 0.8])
 qssf = 1 / np.sqrt(3) * np.array([0.2, 0.9, 0.0])
 w0 = 5.0
