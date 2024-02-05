@@ -57,7 +57,7 @@ def control1setup3(
 
 
 def control1setup3_int_states(
-    ri, sf, Nmax=60, w0=5, gamma_0=0.01, gamma_c=10, deltat=0.003, initime=0.0
+    ri, sf, Nmax=60, w0=5.0, gamma_0=0.01, gamma_c=10, deltat=0.003, initime=0.0
 ):
     """Control setup3 with intermediate states. Function without imax"""
     ###INPUT
