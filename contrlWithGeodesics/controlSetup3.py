@@ -9,7 +9,7 @@ from .control3_step import control3_step
 
 
 def control1setup3(
-    ri, sf, Nmax=60, w0=5, gamma_0=0.01, gamma_c=10, deltat=0.003, initime=0.0
+    ri, sf, Nmax=60, w0=5.0, gamma_0=0.01, gamma_c=10, deltat=0.003, initime=0.0
 ):
     """Control setup3 function without imax"""
     ###INPUT
@@ -36,6 +36,7 @@ def control1setup3(
         ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
     )  # initialize the new evolve state
     ri = np.array([xri, yri, zri])
+    c.append(ri)
 
     while (fidelity(oldri, sf) <= fidelity(ri, sf)) and (helperk < Nmax):
 
