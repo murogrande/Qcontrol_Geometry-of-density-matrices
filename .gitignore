@@ -2,4 +2,5 @@
 *.vscode
 
 **/*/__pycache__
+/contrlWithGeodesics/__pycache__
 .ipynb_checkpoints/
