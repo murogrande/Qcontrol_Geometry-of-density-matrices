@@ -5,13 +5,15 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from sympy.solvers import solve
 
-from .control3_step import control3_step
+from .control2_step import control2_step
+
+P_matrix = [[0.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]  ## Dmatrix of setup 2
 
 
-def control1setup3(
+def control1setup2(
     ri, sf, Nmax=60, w0=5.0, gamma_0=0.01, gamma_c=10, deltat=0.003, initime=0.0
 ):
-    """Control setup3 function without imax"""
+    """Control setup2 function without imax"""
     ###INPUT
     # ri(np.array): np.array[rix,riy,riz] initial quantum
     # sf(np.array): np.array[rix,riy,riz] final quantum
@@ -25,27 +27,27 @@ def control1setup3(
     # soln (solution of odes): solution of odes with parameter t
     #######################################
     lambda_x = Symbol("lambda_x", real=True)  ## simbolic lambda for solving with sympy
-    D_matrix = [
-        [1.0, 0.0, 0.0],
+    P_matrix = [
+        [0.0, 0.0, 0.0],
         [0.0, 1.0, 0.0],
-        [0.0, 0.0, 2.0],
-    ]  ## Dmatrix of setup 3
+        [0.0, 0.0, 1.0],
+    ]  ## Dmatrix of setup 2
     c = [ri]
     tiempototal = [initime]
     vector_lambda = list([])
     # iterate to find the lambda value
     helperk = 0
     oldri = ri  ## save initial state
-    xri, yri, zri, _ = control3_step(
-        ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
+    xri, yri, zri, _ = control2_step(
+        ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, P_matrix, vector_lambda
     )  # initialize the new evolve state
     ri = np.array([xri, yri, zri])
     c.append(ri)
 
     while (fidelity(oldri, sf) <= fidelity(ri, sf)) and (helperk < Nmax):
 
-        x, y, z, soln = control3_step(
-            ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
+        x, y, z, soln = control2_step(
+            ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, P_matrix, vector_lambda
         )
 
         oldri = ri  ## save the old ri
@@ -60,10 +62,10 @@ def control1setup3(
     return c, tiempototal, soln, vector_lambda
 
 
-def control1setup3_int_states(
+def control1setup2_int_states(
     ri, sf, Nmax=60, w0=5.0, gamma_0=0.01, gamma_c=10, deltat=0.003, initime=0.0
 ):
-    """Control setup3 with intermediate states. Function without imax"""
+    """Control setup2 with intermediate states. Function without imax"""
     ###INPUT
     # ri(np.array): np.array[rix,riy,riz] initial quantum
     # sf(np.array): np.array[rix,riy,riz] final quantum
@@ -77,15 +79,14 @@ def control1setup3_int_states(
     # soln (solution of odes): solution of odes with parameter t
     #######################################
     lambda_x = Symbol("lambda_x", real=True)  ## simbolic lambda for solving with sympy
-    D_matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 2]]  ## Dmatrix of setup 3
     c = [ri]
     tiempototal = [initime]
     vector_lambda = list([])
     # iterate to find the lambda value
     helperk = 0
     oldri = ri  ## save initial state
-    xri, yri, zri, solnri = control3_step(
-        ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
+    xri, yri, zri, solnri = control2_step(
+        ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, P_matrix, vector_lambda
     )  # initialize the new evolve state
     ri = np.array([xri, yri, zri])
 
@@ -96,8 +97,8 @@ def control1setup3_int_states(
         print("k", helperk)
         print(fidelity(ri, sf) - fidelity(oldri, sf))
 
-        x, y, z, soln = control3_step(
-            ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
+        x, y, z, soln = control2_step(
+            ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, P_matrix, vector_lambda
         )
 
         oldri = ri  ## save the old ri
