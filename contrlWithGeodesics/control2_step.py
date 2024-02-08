@@ -35,21 +35,21 @@ def control2_step(
 
     vector_lambda.append(lamdasol)
 
-    auxilvk = lamdasol / 4 * (2.0 * muk(ri, sf)[2] - np.dot(ri, D_matrix @ muk(ri, sf)))
+    auxilvk = lamdasol * (-np.dot(ri, P_matrix @ muk(ri, sf)))
     vk = auxilvk if auxilvk > 0 else 0
     ukx = lamdasol * np.cross(ri, muk(ri, sf))[0]
     uky = lamdasol * np.cross(ri, muk(ri, sf))[1]
     ukz = lamdasol * np.cross(ri, muk(ri, sf))[2]
 
-    # Matrix for setup 3
+    # Matrix for setup 2
     Bmatrix = np.array(
         [
-            [-2.0 * gamma_0 - vk / 2.0, -2.0 * (w0 + ukz), 2.0 * uky],
-            [2.0 * (w0 + ukz), -2.0 * gamma_0 - vk / 2.0, -2.0 * ukx],
-            [-2.0 * uky, 2.0 * ukx, -vk],
+            [-2.0 * gamma_0, -2.0 * (w0 + ukz), 2.0 * uky],
+            [2.0 * (w0 + ukz), -2.0 * (gamma_0 + vk), -2.0 * ukx],
+            [-2.0 * uky, 2.0 * ukx, -2.0 * vk],
         ]
     )
-    qk = [0.0, 0.0, vk]  # qk setup3
+    qk = [0.0, 0.0, 0.0]  # qk setup2
 
     def odes(t, X):
         ## this function defines the differential equation
