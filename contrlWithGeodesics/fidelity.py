@@ -6,8 +6,11 @@ def fidelity(rho: np.array, st: np.array):
     rho = np.squeeze(
         np.asarray(rho)
     )  ## this line is import when are getting the time in the imax function
-    return 0.5 * (
-        1
-        + np.dot(rho, st)
-        + (1 - np.dot(rho, rho)) ** 0.5 * (1 - np.dot(st, st)) ** 0.5
-    )
+    return (
+        0.5
+        * (
+            1
+            + np.dot(rho, st)
+            + (1 - np.dot(rho, rho)) ** 0.5 * (1 - np.dot(st, st)) ** 0.5
+        )
+    ).real
