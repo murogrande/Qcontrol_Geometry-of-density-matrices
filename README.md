@@ -1,4 +1,5 @@
-# Qcontrol_Geometry-of-density-matrices
+# Quatum control with Geometry-of-density-matrices
+## contrlwgeo algorithm 
 Quantum control algorithm based on the geometry of quantum states manifold. This control algorithm algorithm supoorts open quantum systems.
 
 Testing code in progress
