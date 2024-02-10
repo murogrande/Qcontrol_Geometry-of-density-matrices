@@ -10,11 +10,11 @@ sys.path.append(parent_dir)
 
 # sys.path.append("/home/mauro/Documents/personal/sphener-code/Qcontrol_Geometry-of-density-matrices")
 
-from contrlWithGeodesics import geodesic
-from contrlWithGeodesics import muk
-from contrlWithGeodesics import fidelity
-from contrlWithGeodesics import control1setup3
-from contrlWithGeodesics import get_time_fidelity
+from contrlwgeo import geodesic
+from contrlwgeo import muk
+from contrlwgeo import fidelity
+from contrlwgeo import control1setup3
+from contrlwgeo import get_time_fidelity
 
 
 class TestAlgo(unittest.TestCase):

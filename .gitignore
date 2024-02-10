@@ -2,6 +2,14 @@
 *.vscode
 
 **/*/__pycache__
-*/contrlWithGeodesics/__pycache__
+
 .ipynb_checkpoints/
-*/__pycache__
+
+*/__pycache__/
+
+
+*.egg-info/
+*.egg
+
+
+contrlwgeo/__pycache__
