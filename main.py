@@ -78,23 +78,3 @@ print(np.trace(state).real)
 #
 # print("fidelity", fidtry)
 # Create the data.
-
-
-def function_z(x, y):
-    return 50 - (x**2 + y**2)
-
-
-N = 50
-x_values = np.linspace(-5, 5, N)
-y_values = np.linspace(-5, 5, N)
-
-
-X, Y = np.meshgrid(x_values, y_values)
-Z = function_z(X, Y)
-
-#%matplotlib notebook
-
-print("Plot")
-fig = plt.figure()
-ax = plt.axes(projection="3d")
-ax.scatter(X, Y, Z)
