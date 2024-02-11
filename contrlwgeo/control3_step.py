@@ -23,7 +23,7 @@ def control3_step(
 ):
 
     # calculate vk, ukx, uky, and ukz: conherent and incoherent controls
-    vk = lambda_x / 4.0 * (2.0 * muk(ri, sf)[2] - np.dot(ri, D_matrix @ muk(ri, sf)))
+    vk = lambda_x * 0.25 * (2.0 * muk(ri, sf)[2] - np.dot(ri, D_matrix @ muk(ri, sf)))
     ukx = lambda_x * np.cross(ri, muk(ri, sf))[0]
     uky = lambda_x * np.cross(ri, muk(ri, sf))[1]
     ukz = lambda_x * np.cross(ri, muk(ri, sf))[2]
