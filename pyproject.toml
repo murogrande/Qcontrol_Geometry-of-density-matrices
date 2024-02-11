@@ -9,4 +9,4 @@ authors = [
 ]
 
 requires-python = ">=3.10"
-dependencies =["numpy","scipy" ,"simpy","matplotlib"]
+dependencies =["numpy","scipy" ,"sympy","matplotlib","vtk","PyQt5"]
