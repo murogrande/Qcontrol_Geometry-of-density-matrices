@@ -6,8 +6,9 @@ from contrlwgeo.controlSetup3 import control1setup3
 from contrlwgeo.control3_step import control3_step
 from contrlwgeo.controlSetup1 import control1setup1
 
-
 import sympy
+
+import matplotlib.pyplot as plt
 
 ## testing setup1
 qsri = 1 / np.sqrt(3) * np.array([0.0, 0.0, 0.9])
@@ -76,3 +77,24 @@ print(np.trace(state).real)
 ## fidtry = fidelity.fidelity(stat2,stat2)
 #
 # print("fidelity", fidtry)
+# Create the data.
+
+
+def function_z(x, y):
+    return 50 - (x**2 + y**2)
+
+
+N = 50
+x_values = np.linspace(-5, 5, N)
+y_values = np.linspace(-5, 5, N)
+
+
+X, Y = np.meshgrid(x_values, y_values)
+Z = function_z(X, Y)
+
+#%matplotlib notebook
+
+print("Plot")
+fig = plt.figure()
+ax = plt.axes(projection="3d")
+ax.scatter(X, Y, Z)
