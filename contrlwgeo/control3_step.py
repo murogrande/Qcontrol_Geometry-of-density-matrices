@@ -35,7 +35,9 @@ def control3_step(
 
     vector_lambda.append(lamdasol)
 
-    auxilvk = lamdasol / 4 * (2.0 * muk(ri, sf)[2] - np.dot(ri, D_matrix @ muk(ri, sf)))
+    auxilvk = (
+        lamdasol * 0.25 * (2.0 * muk(ri, sf)[2] - np.dot(ri, D_matrix @ muk(ri, sf)))
+    )
     vk = auxilvk if auxilvk > 0 else 0
     ukx = lamdasol * np.cross(ri, muk(ri, sf))[0]
     uky = lamdasol * np.cross(ri, muk(ri, sf))[1]
