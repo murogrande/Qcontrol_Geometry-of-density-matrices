@@ -5,6 +5,7 @@ from contrlwgeo import fidelity as fide
 from contrlwgeo.controlSetup3 import control1setup3
 from contrlwgeo.control3_step import control3_step
 from contrlwgeo.controlSetup1 import control1setup1
+from contrlwgeo.pauli_mat_vec import bloch_vector
 
 import sympy
 
@@ -35,8 +36,8 @@ print(estadoslist)
 vect1 = np.array([0.0, 0.0, 0.9])
 vect2 = np.array([0.9, 0.0, 0.0])
 
-print(geo(0.1, vect1, vect2))
-
+# print(geo(1.0, vect1, vect2))
+bloch_vector(geo(1.0, vect1, vect2))
 print(fide(vect1, vect2))
 
 ### data to test control3_step
