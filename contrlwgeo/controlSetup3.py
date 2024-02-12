@@ -93,8 +93,6 @@ def control1setup3_int_states(
 
     while (fidelity(ri, sf) - fidelity(oldri, sf) >= 0.00001) and (helperk < Nmax):
         """hacer una function solo para continuos y luego para intermediate states"""
-        print("k", helperk)
-        print(fidelity(ri, sf) - fidelity(oldri, sf))
 
         x, y, z, soln = control3_step(
             ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda

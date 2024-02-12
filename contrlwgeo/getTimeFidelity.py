@@ -53,10 +53,8 @@ def get_time_fidelity(c, tiempototal, soln, imax, sf, w0=5, gamma_0=0.01, gamma_
         aux2time += timeopt
         tiempototal.append(aux2time)
 
-        print("new time:", timeopt)
         x1, y1, z1 = soln.sol(timeopt)
         rnew = np.array([x1, y1, z1])
-        print("Fidelity", fidelity(rnew, sf))
         ri = rnew
         c.append(ri)
 
