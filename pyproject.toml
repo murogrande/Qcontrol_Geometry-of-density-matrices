@@ -1,16 +1,12 @@
 [project]
-name = "ControlWithGeodesic"
+version="0.1.0"
+name = "contrlwgeo"
 description = "Optimal Control using geodesics of Density matrices manifild "
 readme = "README.md"
 authors = [
     { name = "Mauro Mendizabal", email = "murogrande20@gmail.com" },
     { name = "Dominique Spehner", email = "dspehner@ing-mat.udec.cl" },
 ]
-url="https://github.com/murogrande/Qcontrol_Geometry-of-density-matrices"
-requires-python = ">=3.10"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-numpy = "^1.21.5"
-scipy = "^1.7.3"
-simpy = "^4.1.0"
+requires-python = ">=3.10"
+dependencies =["numpy","scipy" ,"sympy","matplotlib","vtk","PyQt5"]

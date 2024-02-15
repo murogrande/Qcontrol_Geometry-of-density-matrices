@@ -61,7 +61,15 @@ def control1setup3(
 
 
 def control1setup3_int_states(
-    ri, sf, Nmax=60, w0=5.0, gamma_0=0.01, gamma_c=10, deltat=0.003, initime=0.0
+    ri,
+    sf,
+    fidelity_initial,
+    Nmax=60,
+    w0=5.0,
+    gamma_0=0.01,
+    gamma_c=10,
+    deltat=0.003,
+    initime=0.0,
 ):
     """Control setup3 with intermediate states. Function without imax"""
     ###INPUT
@@ -76,6 +84,7 @@ def control1setup3_int_states(
     # tiempototal(np.array): list containing the time steps
     # soln (solution of odes): solution of odes with parameter t
     #######################################
+
     lambda_x = Symbol("lambda_x", real=True)  ## simbolic lambda for solving with sympy
     D_matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 2]]  ## Dmatrix of setup 3
     c = [ri]
@@ -89,12 +98,13 @@ def control1setup3_int_states(
     )  # initialize the new evolve state
     ri = np.array([xri, yri, zri])
 
-    # while (fidelity(oldri, sf) <= fidelity(ri, sf)) and (helperk < Nmax):
+    while (fidelity(ri, sf) - fidelity(oldri, sf) >= 0.001 * fidelity_initial) and (
+        helperk < Nmax
+    ):
+        print("fide hasta inter  ", fidelity(ri, sf))
 
-    while (fidelity(ri, sf) - fidelity(oldri, sf) >= 0.00001) and (helperk < Nmax):
+        print("diferencia ", fidelity(ri, sf) - fidelity(oldri, sf))
         """hacer una function solo para continuos y luego para intermediate states"""
-        print("k", helperk)
-        print(fidelity(ri, sf) - fidelity(oldri, sf))
 
         x, y, z, soln = control3_step(
             ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
@@ -106,7 +116,9 @@ def control1setup3_int_states(
         initime = initime + deltat
         tiempototal.append(initime)
         helperk += 1
+
     ### eliminate the final states
     c = c[0:-1]
     tiempototal = tiempototal[0:-1]
+    print("tiempo total/dt", initime * 1.0 / deltat)
     return c, tiempototal, soln, vector_lambda

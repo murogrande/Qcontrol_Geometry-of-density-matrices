@@ -7,13 +7,11 @@ from sympy.solvers import solve
 
 from .control1_step import control1_step
 
-D_matrix = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 2.0]]  ## Dmatrix of setup 3
-
 
 def control1setup1(
     ri, sf, Nmax=60, w0=5.0, gamma_0=0.01, w_c=5.0, deltat=0.003, initime=0.0
 ):
-    """Control setup3 function without imax"""
+    """Control setup1 function without imax"""
     ###INPUT
     # ri(np.array): np.array[rix,riy,riz] initial quantum
     # sf(np.array): np.array[rix,riy,riz] final quantum

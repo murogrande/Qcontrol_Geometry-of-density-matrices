@@ -1,20 +1,43 @@
 import numpy as np
 
-from contrlWithGeodesics import geodesic as geo
-from contrlWithGeodesics import fidelity as fide
-from contrlWithGeodesics.controlSetup3 import control1setup3
-from contrlWithGeodesics.control3_step import control3_step
+from contrlwgeo import geodesic as geo
+from contrlwgeo import fidelity as fide
+from contrlwgeo.controlSetup3 import control1setup3
+from contrlwgeo.control3_step import control3_step
+from contrlwgeo.controlSetup1 import control1setup1
+from contrlwgeo.pauli_mat_vec import bloch_vector
+
 import sympy
 
-import sys
+import matplotlib.pyplot as plt
 
-print(sys.path)
+## testing setup1
+qsri = 1 / np.sqrt(3) * np.array([0.0, 0.0, 0.9])
+qssf = 1 / np.sqrt(3) * np.array([0.9, 0.0, 0.0])
+w0 = 5.0
+gamma_0 = 0.00
+gamma_c = w0
+Nmax = 40
+imax = 7
+deltat = 0.0030
+
+# Save initial and final states
+auxri = qsri
+auxsf = qssf
+
+estadoslist, tiempolists, solution, vec_lambda = control1setup1(
+    qsri, qssf, Nmax=Nmax, w0=w0, gamma_0=gamma_0, w_c=w0, deltat=deltat
+)
+
+
+print(estadoslist)
+
 
 vect1 = np.array([0.0, 0.0, 0.9])
 vect2 = np.array([0.9, 0.0, 0.0])
 
-print(geo(0.1, vect1, vect2))
-
+# print(geo(1.0, vect1, vect2))
+bloch_vector(geo(1.0, vect1, vect2))
 print(fide(vect1, vect2))
 
 ### data to test control3_step
@@ -29,24 +52,6 @@ x, y, z, soln = control3_step(
     vect1, vect2, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
 )
 
-qsri = 1 / np.sqrt(3) * np.array([0.7, 0.8, 0.8])
-qssf = 1 / np.sqrt(3) * np.array([0.2, 0.9, 0.0])
-w0 = 5.0
-gamma_0 = 0.01
-gamma_c = 10
-Nmax = 40
-imax = 7
-deltat = 0.0030
-
-# Save initial and final states
-auxri = qsri
-auxsf = qssf
-
-estadoslist, tiempolists, solution, vec_lambda = control1setup3(
-    qsri, qssf, Nmax=Nmax, deltat=deltat
-)
-
-print(estadoslist)
 
 # geodesic
 stat1 = np.array([0.0, 0.0, 0.9])
@@ -73,3 +78,4 @@ print(np.trace(state).real)
 ## fidtry = fidelity.fidelity(stat2,stat2)
 #
 # print("fidelity", fidtry)
+# Create the data.
