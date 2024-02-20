@@ -32,7 +32,7 @@ def control1setup3(
     ]  ## Dmatrix of setup 3
     c = [ri]
     tiempototal = [initime]
-    vector_lambda = list([])
+    vector_lambda = list([0.0])
     # iterate to find the lambda value
     helperk = 0
     oldri = ri  ## save initial state
@@ -41,6 +41,7 @@ def control1setup3(
     )  # initialize the new evolve state
     ri = np.array([xri, yri, zri])
     c.append(ri)
+    tiempototal.append(deltat)
 
     while (fidelity(oldri, sf) <= fidelity(ri, sf)) and (helperk < Nmax):
 
@@ -75,6 +76,7 @@ def control1setup3_int_states(
     ###INPUT
     # ri(np.array): np.array[rix,riy,riz] initial quantum
     # sf(np.array): np.array[rix,riy,riz] final quantum
+    # fidelity
     # Nmax(int): Nmax iteration that will run the algorithm
     # ...
     # ...t
@@ -97,14 +99,11 @@ def control1setup3_int_states(
         ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
     )  # initialize the new evolve state
     ri = np.array([xri, yri, zri])
+    tiempototal.append(deltat)
 
     while (fidelity(ri, sf) - fidelity(oldri, sf) >= 0.001 * fidelity_initial) and (
         helperk < Nmax
     ):
-        print("fide hasta inter  ", fidelity(ri, sf))
-
-        print("diferencia ", fidelity(ri, sf) - fidelity(oldri, sf))
-        """hacer una function solo para continuos y luego para intermediate states"""
 
         x, y, z, soln = control3_step(
             ri, sf, lambda_x, w0, gamma_0, gamma_c, deltat, D_matrix, vector_lambda
@@ -120,5 +119,4 @@ def control1setup3_int_states(
     ### eliminate the final states
     c = c[0:-1]
     tiempototal = tiempototal[0:-1]
-    print("tiempo total/dt", initime * 1.0 / deltat)
     return c, tiempototal, soln, vector_lambda
