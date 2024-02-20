@@ -91,7 +91,9 @@ def control1setup3_int_states(
     D_matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 2]]  ## Dmatrix of setup 3
     c = [ri]
     tiempototal = [initime]
-    vector_lambda = list([])
+    vector_lambda = list(
+        []
+    )  ### this has to be changed in the case of intermediary states
     # iterate to find the lambda value
     helperk = 0
     oldri = ri  ## save initial state
