@@ -52,7 +52,7 @@ def control1setup3(
         oldri = ri  ## save the old ri
         ri = np.array([x, y, z])
         c.append(ri)
-        initime = initime + deltat
+        initime += deltat
         tiempototal.append(initime)
         helperk += 1
     ### eliminate the final states

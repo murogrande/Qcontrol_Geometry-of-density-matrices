@@ -136,7 +136,7 @@ class TestAlgo(unittest.TestCase):
             self.assertAlmostEqual(list(estadoslist[i])[0], solEstadolist[i][0])
             self.assertAlmostEqual(list(estadoslist[i])[1], solEstadolist[i][1])
             self.assertAlmostEqual(list(estadoslist[i])[2], solEstadolist[i][2])
-
+        print(tiempolists)
         for i in range(Nmax):
             self.assertAlmostEqual(solTiempo[i], tiempolists[i])
 
